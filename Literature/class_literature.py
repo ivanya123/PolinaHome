@@ -2,7 +2,7 @@ import re
 
 
 class Literature:
-    #Ванечка очень злой
+    #Ванечка самый лучший
     def __init__(self, str_from_bibtex):
         self.title = None
         self.author = None
