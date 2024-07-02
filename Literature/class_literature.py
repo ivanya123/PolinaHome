@@ -28,7 +28,7 @@ class Literature:
     def processing_author_str(author_str):
         match = re.search(r'[A-ZА-Я]{2}', author_str)
 
-        def repl_for_belousov(m: re.Match) -> str:
+        def repl_for_belousov(m) -> str:
             string = '.'.join(list(m.group(0))) + '.'
             return string
 
@@ -37,7 +37,7 @@ class Literature:
 
         pattern = r'(?<!^)\b\w+?\b'
 
-        def repl(m: re.Match) -> str:
+        def repl(m) -> str:
             return f'{m.group(0)[0]}.'
 
         author_str = re.sub(pattern, repl, author_str).replace('-', ' ')
