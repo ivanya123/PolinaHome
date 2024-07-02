@@ -2,7 +2,7 @@ import re
 
 
 class Literature:
-    def __init__(self, str_from_bibtex: str):
+    def __init__(self, str_from_bibtex):
         self.title = None
         self.author = None
         self.journal = None
@@ -15,7 +15,7 @@ class Literature:
         self.processing_str(str_from_bibtex)
 
     @staticmethod
-    def autors_in_gost_str(list_authors: list[str]) -> str:
+    def autors_in_gost_str(list_authors):
         for index_el, author in enumerate(list_authors):
             # Удаляем ведущие и замыкающие пробелы из имени автора
             list_author_names = author.split(' ')
@@ -25,7 +25,7 @@ class Literature:
         return ', '.join(list_authors)
 
     @staticmethod
-    def processing_author_str(author_str: str):
+    def processing_author_str(author_str):
         match = re.search(r'[A-ZА-Я]{2}', author_str)
 
         def repl_for_belousov(m: re.Match) -> str:
@@ -43,7 +43,7 @@ class Literature:
         author_str = re.sub(pattern, repl, author_str).replace('-', ' ')
         return author_str
 
-    def processing_str(self, str_from_bibtex: str) -> None:
+    def processing_str(self, str_from_bibtex) -> None:
         lines = [elem.strip() for elem in str_from_bibtex.splitlines()]
         for line in lines:
             if line.startswith('title'):
