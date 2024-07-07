@@ -30,7 +30,7 @@ class Literature:
         match = re.search(r'[A-ZА-Я]{2}', author_str)
 
         def repl_for_belousov(m) -> str:
-            string = '.'.join(list(m.group(0))) + '.'
+            string = '. '.join(list(m.group(0))) + '.'
             return string
 
         if match:
