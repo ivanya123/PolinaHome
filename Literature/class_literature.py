@@ -2,8 +2,8 @@ import re
 
 
 class Literature:
-    #Ванечка злой!!! (но я его люблю)
     def __init__(self, str_from_bibtex):
+        self.number = None
         self.title = None
         self.author = None
         self.journal = None
@@ -16,7 +16,7 @@ class Literature:
         self.processing_str(str_from_bibtex)
 
     @staticmethod
-    def autors_in_gost_str(list_authors):
+    def authors_in_gost_str(list_authors):
         for index_el, author in enumerate(list_authors):
             # Удаляем ведущие и замыкающие пробелы из имени автора
             list_author_names = author.split(' ')
@@ -72,7 +72,7 @@ class Literature:
         # M. Wang, K. M. Nowicki, J. T. S. Irvine //
         # Journal of The Electrochemical Society. – 2022. – Т. 169. – №. 6. – P. 064509.
         return (f'{self.main_author} {self.title} / '
-                f'{self.autors_in_gost_str(self.list_authors)} // '
+                f'{self.authors_in_gost_str(self.list_authors)} // '
                 f'{self.journal}. - {self.year}. -T {self.volume}. - №. {self.number}. -P. {self.pages}.')
 
 
