@@ -1,5 +1,5 @@
 import re
-
+from copy import copy
 
 class Literature:
     def __init__(self, str_from_bibtex):
@@ -17,13 +17,14 @@ class Literature:
 
     @staticmethod
     def authors_in_gost_str(list_authors):
+        new_list_authors = copy(list_authors)
         for index_el, author in enumerate(list_authors):
             # Удаляем ведущие и замыкающие пробелы из имени автора
             list_author_names = author.split(' ')
             first_name = list_author_names.pop(0)
             list_author_names.append(first_name)
-            list_authors[index_el] = ' '.join(list_author_names).strip(' ,')
-        return ', '.join(list_authors)
+            new_list_authors[index_el] = ' '.join(list_author_names).strip(' ,')
+        return ', '.join(new_list_authors)
 
     @staticmethod
     def processing_author_str(author_str):
@@ -71,9 +72,14 @@ class Literature:
         # Wang, M. A novel solid oxide electrochemical oxygen pump for oxygen therapy /
         # M. Wang, K. M. Nowicki, J. T. S. Irvine //
         # Journal of The Electrochemical Society. – 2022. – Т. 169. – №. 6. – P. 064509.
+        if not self.number:
+            return (f'{self.main_author} {self.title} / '
+                    f'{self.authors_in_gost_str(self.list_authors)} // '
+                    f'{self.journal}. – {self.year}. – V. {self.volume}. – P. {self.pages}.')
+
         return (f'{self.main_author} {self.title} / '
                 f'{self.authors_in_gost_str(self.list_authors)} // '
-                f'{self.journal}. - {self.year}. -T {self.volume}. - №. {self.number}. -P. {self.pages}.')
+                f'{self.journal}. – {self.year}. – V. {self.volume}. – №. {self.number}. – P. {self.pages}.')
 
 
 if __name__ == '__main__':
